@@ -185,6 +185,9 @@ button:focus-visible {
 }
 
 #botao-converter:hover { background: var(--tinta-suave); }
+select:hover {
+  border-color: var(--verde-selo);
+}
 #botao-converter:disabled { opacity: 0.6; cursor: wait; }
 
 /* ---------- Resultado ---------- */
