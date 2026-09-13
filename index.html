@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Câmbio Direto — conversor de moedas entre países</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topo">
+    <p class="eyebrow">câmbio entre dois países</p>
+    <h1>Câmbio Direto</h1>
+    <p class="subtitulo">Escolha dois países e veja quanto vale a moeda de um no bolso do outro.</p>
+  </header>
+
+  <main>
+    <form id="form-conversao" class="painel-conversao" novalidate>
+
+      <div class="pais-bloco" id="bloco-origem">
+        <label for="select-origem">De</label>
+        <div class="pais-selo">
+          <img id="bandeira-origem" class="bandeira" alt="" hidden>
+          <select id="select-origem" required></select>
+        </div>
+        <span class="moeda-tag" id="moeda-origem">—</span>
+      </div>
+
+      <button type="button" id="botao-inverter" title="Inverter países" aria-label="Inverter países">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path d="M7 7h11l-3-3M17 17H6l3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="pais-bloco" id="bloco-destino">
+        <label for="select-destino">Para</label>
+        <div class="pais-selo">
+          <img id="bandeira-destino" class="bandeira" alt="" hidden>
+          <select id="select-destino" required></select>
+        </div>
+        <span class="moeda-tag" id="moeda-destino">—</span>
+      </div>
+
+      <div class="linha-valor">
+        <label for="campo-valor">Valor a converter</label>
+        <input type="number" id="campo-valor" min="0" step="0.01" value="100" inputmode="decimal" required>
+        <button type="submit" id="botao-converter">Converter</button>
+      </div>
+    </form>
+
+    <section id="resultado" class="resultado" aria-live="polite" hidden>
+      <p class="resultado-conta"></p>
+      <p class="resultado-valor"></p>
+      <p class="resultado-taxa"></p>
+    </section>
+
+    <section id="mensagem-erro" class="mensagem-erro" role="alert" hidden></section>
+
+    <p id="carregando-paises" class="status-carregamento">Carregando lista de países…</p>
+  </main>
+
+  <footer>
+    <p>Dados de países e bandeiras via <a href="https://restcountries.com" target="_blank" rel="noopener">REST Countries</a>. Cotações via <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">ExchangeRate-API</a>.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
