@@ -71,6 +71,9 @@ const PAISES = [
   { codigo: 'US', nome: 'Estados Unidos', codigoMoeda: 'USD', nomeMoeda: 'Dólar Americano' },
   { codigo: 'UY', nome: 'Uruguai', codigoMoeda: 'UYU', nomeMoeda: 'Peso Uruguaio' },
   { codigo: 'VN', nome: 'Vietnã', codigoMoeda: 'VND', nomeMoeda: 'Dong' },
+  { codigo: 'VE', nome: 'Venezuela', codigoMoeda: 'VES', nomeMoeda: 'Bolívar' },
+  { codigo: 'CU', nome: 'Cuba', codigoMoeda: 'CUP', nomeMoeda: 'Peso Cubano' },
+  { codigo: 'DO', nome: 'República Dominicana', codigoMoeda: 'DOP', nomeMoeda: 'Peso Dominicano' },
 ];
 
 const selectOrigem = document.getElementById('select-origem');
