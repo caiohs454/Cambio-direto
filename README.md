@@ -1,7 +1,7 @@
 # Câmbio Direto
 
 ## Autor
-[Seu nome completo] — Matrícula [seu número de matrícula]
+Caio Henrique Stecanella — RA: 22552755
 
 ## Descrição
 Aplicação web que converte valores entre as moedas de dois países escolhidos pelo usuário, mostrando a bandeira e o código da moeda de cada um.
