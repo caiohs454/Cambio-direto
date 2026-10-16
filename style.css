@@ -185,9 +185,7 @@ button:focus-visible {
 }
 
 #botao-converter:hover { background: var(--tinta-suave); }
-select:hover {
-  border-color: var(--verde-selo);
-}
+select:hover { border-color: var(--verde-selo); }
 #botao-converter:disabled { opacity: 0.6; cursor: wait; }
 
 /* ---------- Resultado ---------- */
@@ -269,4 +267,30 @@ footer a { color: var(--verde-selo); }
 @media (prefers-reduced-motion: reduce) {
   #botao-inverter { transition: none; }
   #botao-inverter:hover { transform: none; }
+}
+
+/* ---------- Conversões salvas ---------- */
+#botao-salvar {
+  margin-top: 16px;
+  border: 1px solid #F2D98B;
+  border-radius: 10px;
+  padding: 10px 18px;
+  background: transparent;
+  color: #F2D98B;
+  font-weight: 600;
+  cursor: pointer;
+}
+#botao-salvar:hover { background: rgba(242, 217, 139, 0.12); }
+
+.salvos { margin-top: 40px; }
+.salvos h2 { font-family: 'Fraunces', serif; font-size: 1.4rem; margin: 0 0 12px; }
+.salvos ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.salvos li {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  background: var(--cartao); border: 1px solid var(--linha); border-radius: 12px;
+  padding: 12px 16px; font-size: 0.92rem;
+}
+.botao-excluir {
+  border: 1px solid #F0C7BC; background: var(--erro-fundo); color: var(--erro-texto);
+  border-radius: 8px; padding: 6px 12px; cursor: pointer; font-weight: 600;
 }

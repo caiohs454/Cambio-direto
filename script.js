@@ -4,6 +4,14 @@
 // bandeiras vêm do FlagCDN (imagem simples, sem CORS) e a cotação em tempo
 // real vem da ExchangeRate-API via fetch.
 
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+// Troque pelos dados do SEU projeto (Project Settings -> API).
+// A chave anon public foi feita para uso no frontend; nunca use a service_role aqui.
+const SUPABASE_URL = 'https://azkjbfkxclowdlqgevmn.supabase.co/rest/v1/';
+const SUPABASE_ANON_KEY = 'sb_publishable_RF0ZjIFpg1SwYhx5osMTrw_UUiN7Koc';
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 const URL_TAXA = (codigo) => `https://open.er-api.com/v6/latest/${codigo}`;
 const URL_BANDEIRA = (cca2) => `https://flagcdn.com/w80/${cca2.toLowerCase()}.png`;
 
@@ -189,6 +197,14 @@ async function converter(evento) {
     const valorConvertido = valor * taxa;
     const atualizadoEm = dados.time_last_update_utc;
     mostrarResultado({ paisOrigem, paisDestino, valor, taxa, valorConvertido, atualizadoEm });
+    ultimaConversao = {
+      pais_origem: paisOrigem.codigo,
+      pais_destino: paisDestino.codigo,
+      valor,
+      taxa,
+      resultado: valorConvertido,
+    };
+    botaoSalvar.hidden = false;
   } catch (erro) {
     exibirErro('A API de câmbio não respondeu. Tente novamente em instantes.');
   } finally {
@@ -233,4 +249,79 @@ selectDestino.addEventListener('change', () => atualizarSelo('destino'));
 botaoInverter.addEventListener('click', inverterPaises);
 form.addEventListener('submit', converter);
 
+// ---------- Persistência com Supabase (CREATE, READ, DELETE) ----------
+let ultimaConversao = null;
+const botaoSalvar = document.getElementById('botao-salvar');
+const listaSalvos = document.getElementById('lista-salvos');
+const avisoSalvos = document.getElementById('aviso-salvos');
+
+/** CREATE: salva a última conversão feita na tabela "favoritos". */
+async function salvarConversao() {
+  if (!ultimaConversao) return;
+  botaoSalvar.disabled = true;
+  const { error } = await supabase.from('favoritos').insert(ultimaConversao);
+  botaoSalvar.disabled = false;
+  if (error) {
+    console.error(error);
+    exibirErro('Não foi possível salvar a conversão. Tente novamente.');
+    return;
+  }
+  listarFavoritos();
+}
+
+/** READ: busca as conversões salvas, da mais recente para a mais antiga. */
+async function listarFavoritos() {
+  const { data, error } = await supabase
+    .from('favoritos')
+    .select('*')
+    .order('criado_em', { ascending: false });
+  if (error) {
+    console.error(error);
+    avisoSalvos.textContent = 'Não foi possível carregar suas conversões salvas.';
+    return;
+  }
+  renderizarFavoritos(data);
+}
+
+/** DELETE: remove uma conversão pelo id e recarrega a lista. */
+async function removerFavorito(id) {
+  const { error } = await supabase.from('favoritos').delete().eq('id', id);
+  if (error) {
+    console.error(error);
+    exibirErro('Não foi possível excluir a conversão.');
+    return;
+  }
+  listarFavoritos();
+}
+
+function renderizarFavoritos(itens) {
+  listaSalvos.innerHTML = '';
+  avisoSalvos.textContent = itens.length ? '' : 'Nenhuma conversão salva ainda.';
+
+  itens.forEach((item) => {
+    const origem = paisesPorCodigo[item.pais_origem];
+    const destino = paisesPorCodigo[item.pais_destino];
+    if (!origem || !destino) return;
+
+    const li = document.createElement('li');
+    const texto = document.createElement('span');
+    texto.textContent =
+      `${origem.nome} → ${destino.nome}: ` +
+      `${formatarMoeda(item.valor, origem.codigoMoeda)} = ${formatarMoeda(item.resultado, destino.codigoMoeda)}`;
+
+    const botao = document.createElement('button');
+    botao.type = 'button';
+    botao.className = 'botao-excluir';
+    botao.textContent = 'Excluir';
+    botao.setAttribute('aria-label', `Excluir conversão ${origem.nome} para ${destino.nome}`);
+    botao.addEventListener('click', () => removerFavorito(item.id));
+
+    li.append(texto, botao);
+    listaSalvos.appendChild(li);
+  });
+}
+
+botaoSalvar.addEventListener('click', salvarConversao);
+
 carregarPaises();
+listarFavoritos();

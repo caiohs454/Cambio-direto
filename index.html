@@ -55,6 +55,13 @@
       <p class="resultado-conta"></p>
       <p class="resultado-valor"></p>
       <p class="resultado-taxa"></p>
+      <button type="button" id="botao-salvar" hidden>Salvar conversão</button>
+    </section>
+
+    <section class="salvos" aria-labelledby="titulo-salvos">
+      <h2 id="titulo-salvos">Minhas conversões salvas</h2>
+      <p id="aviso-salvos" class="status-carregamento">Carregando…</p>
+      <ul id="lista-salvos"></ul>
     </section>
 
     <section id="mensagem-erro" class="mensagem-erro" role="alert" hidden></section>
@@ -66,6 +73,6 @@
     <p>Dados de países e bandeiras via <a href="https://restcountries.com" target="_blank" rel="noopener">REST Countries</a>. Cotações via <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">ExchangeRate-API</a>.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
