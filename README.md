@@ -1,3 +1,4 @@
+<img width="1213" height="142" alt="evidenciassq2-tags-dockerhub png" src="https://github.com/user-attachments/assets/ac303dc2-57ca-466c-aa7f-a78ed80a6826" />
 # Câmbio Direto
 
 ## Autor
@@ -48,6 +49,8 @@ Dois containers da mesma aplicação rodando ao mesmo tempo, nas portas 8080 e 8
 docker run -d -p 8080:80 --name app1 caiohs454/cambio-direto:1.1
 docker run -d -p 8081:80 --name app2 caiohs454/cambio-direto:1.1
 ```
-Evidência: ![docker ps com dois containers](evidencias/sq4-docker-ps.png)
+Evidência: !<img width="1213" height="142" alt="evidenciassq2-tags-dockerhub png" src="https://github.com/user-attachments/assets/6ec0814f-4e83-4006-8c59-37ed6fe99322" /><img width="1178" height="64" alt="evidenciassq4-docker-ps png" src="https://github.com/user-attachments/assets/8095d1c8-359e-43e8-aeab-79a2d8f7b0d6" />
+
+
 
 **Se eu tivesse 100 containers, como gerenciaria?** Subir e vigiar 100 containers na mão é inviável. O Kubernetes é um orquestrador: o conjunto de máquinas forma um *cluster*, e a menor unidade que ele executa é o *pod* (um ou mais containers juntos). Eu declaro quantas *réplicas* do pod quero e o Kubernetes distribui os pods entre as máquinas, reinicia os que falham, balanceia o tráfego entre as réplicas e aumenta ou diminui a quantidade conforme a demanda.
