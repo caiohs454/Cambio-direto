@@ -293,4 +293,7 @@ footer a { color: var(--verde-selo); }
 .botao-excluir {
   border: 1px solid #F0C7BC; background: var(--erro-fundo); color: var(--erro-texto);
   border-radius: 8px; padding: 6px 12px; cursor: pointer; font-weight: 600;
+  
 }
+.botao-excluir:hover { background: #F6D5CE; }
+#botao-salvar:disabled { opacity: 0.6; cursor: wait; }
