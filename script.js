@@ -307,7 +307,8 @@ function renderizarFavoritos(itens) {
     const texto = document.createElement('span');
     texto.textContent =
       `${origem.nome} → ${destino.nome}: ` +
-      `${formatarMoeda(item.valor, origem.codigoMoeda)} = ${formatarMoeda(item.resultado, destino.codigoMoeda)}`;
+      `${formatarMoeda(item.valor, origem.codigoMoeda)} = ${formatarMoeda(item.resultado, destino.codigoMoeda)}` +
+      ` · salvo em ${new Date(item.criado_em).toLocaleDateString('pt-BR')}`;
 
     const botao = document.createElement('button');
     botao.type = 'button';
