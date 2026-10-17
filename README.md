@@ -1,4 +1,4 @@
-<img width="1213" height="142" alt="evidenciassq2-tags-dockerhub png" src="https://github.com/user-attachments/assets/ac303dc2-57ca-466c-aa7f-a78ed80a6826" />
+
 # Câmbio Direto
 
 ## Autor
