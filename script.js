@@ -8,8 +8,8 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 // Troque pelos dados do SEU projeto (Project Settings -> API).
 // A chave anon public foi feita para uso no frontend; nunca use a service_role aqui.
-const SUPABASE_URL = 'https://azkjbfkxclowdlqgevmn.supabase.co/rest/v1/';
-const SUPABASE_ANON_KEY = 'sb_publishable_RF0ZjIFpg1SwYhx5osMTrw_UUiN7Koc';
+const SUPABASE_URL = 'https://azkjbfkxclowdlqgevmn.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF6a2piZmt4Y2xvd2RscWdldm1uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIxNjQzNzYsImV4cCI6MjEwNzc0MDM3Nn0.7A17fBmV2PNsWIVP2ZUMJDCD6weGPRHETzgf4az5018';
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const URL_TAXA = (codigo) => `https://open.er-api.com/v6/latest/${codigo}`;
